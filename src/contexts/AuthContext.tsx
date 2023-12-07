@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.tsx
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 
@@ -7,6 +6,7 @@ interface AuthContextType {
   authToken: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  refreshToken: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -34,52 +34,76 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/login`,
-        {
-          email,
-          password,
-        }
+        { email, password }
       );
-      console.log("Response Headers:", response.headers);
-
+  
       if (response.status === 200) {
-        const authToken = response.headers["authorization"];
-        const refreshToken = response.headers["refresh-token"];
-        if (authToken && refreshToken) {
-          localStorage.setItem("Authorization", authToken);
-          localStorage.setItem("Refresh-Token", refreshToken);
-          // alert(authToken);
+        const newAuthToken = response.headers['authorization'];
+        const newRefreshToken = response.headers['refresh-token'];
+  
+        if (newAuthToken && newRefreshToken) {
+          localStorage.setItem("Authorization", newAuthToken);
+          localStorage.setItem("Refresh-Token", newRefreshToken);
           setIsLoggedIn(true);
-          setAuthToken(authToken);
-          setRefreshToken(refreshToken);
+          setAuthToken(newAuthToken);
+          setRefreshToken(newRefreshToken);
         }
       }
     } catch (error) {
       console.error("Login failed:", error);
-      throw error; // Rethrow the error to be handled in the component
+      // Handle login failure
     }
   };
 
   const logout = async () => {
     if (authToken) {
       try {
+        await refreshAuthToken();
         await axios.get(`${process.env.REACT_APP_API_URL}/logout`, {
           headers: {
-            Authorization: `Bearer ${authToken}`,
+            Authorization: `${authToken}`,
           },
+          withCredentials: true
         });
-        // Clear local storage and state
+
         localStorage.removeItem("Authorization");
+        localStorage.removeItem("Refresh-Token");
         setIsLoggedIn(false);
         setAuthToken(null);
+        setRefreshToken(null);
       } catch (error) {
         console.error("Logout failed:", error);
-        throw error; // Rethrow the error to be handled in the component
+        // Handle logout failure
       }
     }
   };
 
+  const refreshAuthToken = async () => {
+    try {
+      const currentRefreshToken = localStorage.getItem("Refresh-Token");
+      if (authToken && currentRefreshToken) {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/refresh`, {
+          headers: {
+            Authorization: `${authToken}`,
+            'Refresh-Token': currentRefreshToken,
+          },
+        });
+
+        if (response.status === 204) {
+          const newAuthToken = response.headers["authorization"];
+          if (newAuthToken) {
+            localStorage.setItem("Authorization", newAuthToken);
+            setAuthToken(newAuthToken);
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Token refresh failed:", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, authToken, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, authToken, login, logout, refreshToken: refreshAuthToken }}>
       {children}
     </AuthContext.Provider>
   );

@@ -35,21 +35,21 @@ export default function Header() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" style={{ marginRight: '10%' }} />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto" style={{ backgroundColor: '#50CB93' }}>
             <Nav.Link className="text text-center" href="/">
               Home
             </Nav.Link>
-            <Nav.Link className="text text-center" href="/about">
-              About
+            <Nav.Link className="text text-center" href="/community">
+              Community
             </Nav.Link>
             <Nav.Link className="text text-center" href="/courses">
-              My
+              Messages
             </Nav.Link>
             <Nav.Link className="text text-center" href="/support">
-              Support Us!
+              My Account
             </Nav.Link>
           </Nav>
-          <div className="text text-center" style={{ marginRight: '5%' }}>
+          <div className="text text-center" style={{ marginRight: '5%', backgroundColor: '#50CB93' }}>
             {isLoggedIn ? (
               <>
                 <Button
