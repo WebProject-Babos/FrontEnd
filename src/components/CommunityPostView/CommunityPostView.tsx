@@ -76,7 +76,10 @@ export default function CommunityPostView() {
     try {
       setIsLoading(true);
       const postResponse = await axios.get(`${apiUrl}/posts/${postId}`);
+      const getLikedStatus = await axios.get(`${apiUrl}/posts/${postId}/isLiked`, { headers: { Authorization: `${authToken}` } });
       setPost(postResponse.data.posts[0]);
+      setIsLiked(getLikedStatus.data.liked);
+      console.log(isLiked);
 
       const commentsResponse = await axios.get(
         `${apiUrl}/posts/${postId}/comments`
@@ -84,7 +87,6 @@ export default function CommunityPostView() {
       setComments(commentsResponse.data.comments);
 
       setLikeCount(postResponse.data.posts[0].likeCount);
-      setIsLiked(postResponse.data.posts[0].liked);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching post and comments:", error);
@@ -108,6 +110,7 @@ export default function CommunityPostView() {
         { headers: { Authorization: `${authToken}` } }
       );
       setNewComment("");
+      alert("Success!");
       fetchPostAndComments(); // Refresh comments
     } catch (error) {
       console.error("Error posting comment:", error);

@@ -82,14 +82,14 @@ export default function AddPost() {
             <InputGroup.Text>내용</InputGroup.Text>
             <Form.Control
               as="textarea"
-              placeholder="내용을 입력해주세요 (2000자 이내)"
+              placeholder="내용을 입력해주세요 (255자 이내)"
               rows={4}
               value={postContent}
               onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
                 setPostContent(event.target.value);
                 setContentLength(event.target.value.length);
               }}
-              maxLength={2000}
+              maxLength={255}
               required
             />
           </InputGroup>
@@ -97,7 +97,7 @@ export default function AddPost() {
             className="text-end mr-4"
             style={{ width: "80%", margin: "0 auto" }}
           >
-            {contentLength}/2000
+            {contentLength}/255
           </div>
 
           <div className="d-flex justify-content-end mt-4 mr-3">
