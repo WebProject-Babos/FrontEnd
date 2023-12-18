@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import "./MessagesHome.css";
 import PageView from "../PageView/PageView";
 
@@ -23,16 +23,32 @@ const MessagesHome = () => {
       // Fetch sent messages
       const sentResponse = await axios.get(
         `${process.env.REACT_APP_API_URL}/messages/me/send`,
-        { headers: { Authorization: `${localStorage.getItem("Authorization")}` }}
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("Authorization")}`,
+          },
+        }
       );
-      setSentMessages(sentResponse.data.messages);
+      const sortedSentMessages = sentResponse.data.messages.sort(
+        (a: Message, b: Message) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      setSentMessages(sortedSentMessages);
 
       // Fetch received messages
       const receivedResponse = await axios.get(
         `${process.env.REACT_APP_API_URL}/messages/me/receive`,
-        { headers: { Authorization: `${localStorage.getItem("Authorization")}` }}
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("Authorization")}`,
+          },
+        }
       );
-      setReceivedMessages(receivedResponse.data.messages);
+      const sortedReceivedMessages = receivedResponse.data.messages.sort(
+        (a: Message, b: Message) =>
+          new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+      setReceivedMessages(sortedReceivedMessages);
 
       setIsLoading(false);
     } catch (error) {
@@ -48,9 +64,35 @@ const MessagesHome = () => {
   return (
     <PageView isLoading={isLoading}>
       <div className="messages-home">
-        <h2>{(showSent ? "Sent Messages": "Received Messages")}</h2><br></br>
+        <div className="header-container">
+          <h2>{showSent ? "Sent Messages" : "Received Messages"}</h2>
+          <Button
+            href="/messages/send"
+            className="my-auto align-self-center"
+            variant="success"
+            size="sm"
+            style={{
+              marginLeft: "20px",
+              backgroundColor: "#43A680",
+              borderColor: "#43A680",
+            }}
+          >
+            <img
+              src="/images/plus.svg"
+              className="bi"
+              width="23"
+              height="23"
+              alt="add-icon"
+            />
+            Send New Message
+          </Button>
+        </div>
+        <br></br>
         <div className="toggle-button-container">
-          <button className="toggle-button" onClick={() => setShowSent(!showSent)}>
+          <button
+            className="toggle-button"
+            onClick={() => setShowSent(!showSent)}
+          >
             {showSent ? "Show Received Messages" : "Show Sent Messages"}
           </button>
         </div>
@@ -60,7 +102,9 @@ const MessagesHome = () => {
             <Card key={message.id} className="message-card">
               <Card.Body>
                 <Card.Title>
-                  {showSent ? "To: " + message.receiverNickname : "From: " + message.senderNickname}
+                  {showSent
+                    ? "To: " + message.receiverNickname
+                    : "From: " + message.senderNickname}
                 </Card.Title>
                 <Card.Text>{message.content}</Card.Text>
                 <Card.Footer>

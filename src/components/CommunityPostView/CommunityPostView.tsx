@@ -76,7 +76,7 @@ export default function CommunityPostView() {
     try {
       setIsLoading(true);
       const postResponse = await axios.get(`${apiUrl}/posts/${postId}`);
-      const getLikedStatus = await axios.get(`${apiUrl}/posts/${postId}/isLiked`, { headers: { Authorization: `${authToken}` } });
+      const getLikedStatus = await axios.get(`${apiUrl}/posts/${postId}/like`, { headers: { Authorization: `${authToken}` } });
       setPost(postResponse.data.posts[0]);
       setIsLiked(getLikedStatus.data.liked);
       console.log(isLiked);

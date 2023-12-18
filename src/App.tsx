@@ -13,6 +13,7 @@ import CommunityPostView from "./components/CommunityPostView/CommunityPostView"
 import SignUp from "./components/SignUp/SignUp";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import MessagesHome from "./components/MessagesHome/MessagesHome";
+import SendMessage from "./components/SendMessage/SendMessage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/community/addPost" element={<ProtectedRoute><AddPost /></ProtectedRoute>} />
           <Route path="/community/view/:postId" element={<ProtectedRoute><CommunityPostView /></ProtectedRoute>} />
           <Route path="/messages" element={<ProtectedRoute><MessagesHome /></ProtectedRoute>} />
+          <Route path="/messages/send" element={<ProtectedRoute><SendMessage /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -45,9 +45,6 @@ export default function Header() {
             <Nav.Link className="text text-center" href="/messages">
               Messages
             </Nav.Link>
-            <Nav.Link className="text text-center" href="/support">
-              My Account
-            </Nav.Link>
           </Nav>
           <div className="text text-center" style={{ marginRight: '5%', backgroundColor: '#50CB93' }}>
             {isLoggedIn ? (
