@@ -53,7 +53,7 @@ export default function AddPost() {
       <Container fluid className="justify-content-center align-items-center">
         <Row>
           <Col xs={8}>
-            <h2 style={{ marginLeft: "14%" }}>게시글 추가</h2>
+            <h2 style={{ marginLeft: "14%" }}>Write new post</h2>
           </Col>
         </Row>
         <Form onSubmit={handleSubmit}>
@@ -61,10 +61,10 @@ export default function AddPost() {
             className="mb-3 mx-auto"
             style={{ width: "80%", marginTop: "30px", marginBottom: "30px" }}
           >
-            <InputGroup.Text id="inputGroup-sizing-lg">제목</InputGroup.Text>
+            <InputGroup.Text id="inputGroup-sizing-lg">Title</InputGroup.Text>
             <Form.Control
               aria-label="Large"
-              placeholder="제목을 입력해주세요 (45자 이내)"
+              placeholder="Please Enter Title (Within 45 Chars)"
               aria-describedby="inputGroup-sizing-sm"
               value={postTitle}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -79,10 +79,10 @@ export default function AddPost() {
             className="mb-3 mx-auto"
             style={{ width: "80%", marginTop: "30px", marginBottom: "30px" }}
           >
-            <InputGroup.Text>내용</InputGroup.Text>
+            <InputGroup.Text>Content</InputGroup.Text>
             <Form.Control
               as="textarea"
-              placeholder="내용을 입력해주세요 (255자 이내)"
+              placeholder="Please Enter Content (Within 255 Chars)"
               rows={4}
               value={postContent}
               onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -102,7 +102,7 @@ export default function AddPost() {
 
           <div className="d-flex justify-content-end mt-4 mr-3">
             <Button variant="success" type="submit">
-              게시
+              Post
             </Button>
           </div>
         </Form>

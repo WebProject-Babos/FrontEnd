@@ -52,17 +52,17 @@ export default function CommunityPostView() {
     try {
       setIsLoading(true);
 
-      // Fetch post data
       const postResponse = await axios.get(`${apiUrl}/posts/${postId}`);
       setPost(postResponse.data.posts[0]);
+      setLikeCount(postResponse.data.posts[0].likeCount);
 
-      // Fetch liked status
+
       const getLikedStatus = await axios.get(`${apiUrl}/posts/${postId}/like`, {
         headers: { Authorization: authToken },
       });
       setIsLiked(getLikedStatus.data.liked);
 
-      // Fetch comments
+
       const commentsResponse = await axios.get(
         `${apiUrl}/posts/${postId}/comments`
       );

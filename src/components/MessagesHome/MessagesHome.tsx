@@ -25,7 +25,6 @@ const MessagesHome = () => {
       await authContext.refreshToken();
     }
     try {
-      // Fetch sent messages
       const sentResponse = await axios.get(
         `${process.env.REACT_APP_API_URL}/messages/me/send`,
         {
