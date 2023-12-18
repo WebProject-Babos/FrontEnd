@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="col-md-10 d-flex align-items-center">
           <span className="text-muted">
             &copy; 2023 Joonwoo Jang, Geonho Park <br></br>
-            web-FrontEnd <strong>v.1.1.0b_20231206</strong>
+            web-FrontEnd <strong>v.1.0.0_20231218</strong>
             <br></br>
-            web-backEnd <strong>v.1.1.0b_20231206</strong>
+            web-BackEnd <strong>v.1.0.0_20231218</strong>
           </span>
         </div>
         <ul className="nav col-md-1 justify-content-end list-unstyled d-flex">

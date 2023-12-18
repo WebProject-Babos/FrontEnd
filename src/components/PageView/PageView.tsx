@@ -11,7 +11,7 @@ type PageViewProps = {
 
 export default function PageView({
   children,
-  paddingBottom = 0,
+  paddingBottom = 40,
   isLoading = false,
 }: PageViewProps) {
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function PageView({
   }, []);
 
   const style = {
-    minHeight: `calc(100vh - 70px)`,
+    minHeight: `60vh`,
     display: "flex",
     marginTop: "90px",
     paddingBottom: paddingBottom,

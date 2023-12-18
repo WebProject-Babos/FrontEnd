@@ -43,23 +43,9 @@ export default function HomePage() {
       <Container
         fluid
         className="justify-content-center align-items-center text-center"
-        style={{ paddingTop: "100px" }}
+        style={{ paddingTop: "80px" }}
       >
-        <div>
-          <Row>
-            <Col style={{ position: "relative" }}>
-              <div
-                style={{
-                  position: "absolute",
-                  top: "55%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  paddingLeft: window.innerWidth < 550 ? "5%" : 0,
-                }}
-              ></div>
-            </Col>
-          </Row>
-
+       
           <div>
             <h1 className="display-5">
               <strong>PKU Community Project</strong>
@@ -93,7 +79,7 @@ export default function HomePage() {
               <p>Supervised by 张岩</p>
             </figure>
           </div>
-        </div>
+      
       </Container>
     </PageView>
   );

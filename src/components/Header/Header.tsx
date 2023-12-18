@@ -70,7 +70,7 @@ export default function Header() {
           <div className="text text-center" style={{ marginRight: '5%', backgroundColor: '#50CB93' }}>
             {isLoggedIn ? (
               <>
-                {`Welcome, ${nickName}! Your Website ID is ${id}.  `}
+                Welcome, <strong>{nickName}</strong>! Your Website ID is <strong>{id}</strong>.
                 <Button
                   className="text text-center"
                   variant="danger"
