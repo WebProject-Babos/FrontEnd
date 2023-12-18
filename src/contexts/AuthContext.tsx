@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     const storedAuthToken = localStorage.getItem("Authorization");
+    setIsLoggedIn(!!storedAuthToken); // Update to true if token exists
     const storedRefreshToken = localStorage.getItem("Refresh-Token");
     if (storedAuthToken && storedRefreshToken) {
       setIsLoggedIn(true);
@@ -50,8 +51,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
       }
     } catch (error) {
-      console.error("Login failed:", error);
-      // Handle login failure
+      if (axios.isAxiosError(error) && error.response) {
+        throw new Error(`Login Error: ${error.response.status} ${error.response.statusText}`);
+      } else {
+        throw new Error("An unknown error occurred during login.");
+      }
     }
   };
 

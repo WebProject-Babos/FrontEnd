@@ -10,6 +10,9 @@ import Footer from "./components/Footer/Footer";
 import CommunityHome from "./components/CommunityHome/CommunityHome";
 import AddPost from "./components/AddPost/AddPost";
 import CommunityPostView from "./components/CommunityPostView/CommunityPostView";
+import SignUp from "./components/SignUp/SignUp";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import MessagesHome from "./components/MessagesHome/MessagesHome";
 
 function App() {
   return (
@@ -19,9 +22,11 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/login" element={<Login />} />
-          <Route path="/community" element={<CommunityHome />} />
-          <Route path="/community/addPost" element={<AddPost />} />
-          <Route path="/community/view/:postId" element={<CommunityPostView />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/community" element={<ProtectedRoute><CommunityHome /></ProtectedRoute>} />
+          <Route path="/community/addPost" element={<ProtectedRoute><AddPost /></ProtectedRoute>} />
+          <Route path="/community/view/:postId" element={<ProtectedRoute><CommunityPostView /></ProtectedRoute>} />
+          <Route path="/messages" element={<ProtectedRoute><MessagesHome /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </BrowserRouter>

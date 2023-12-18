@@ -1,0 +1,48 @@
+.messages-home {
+    width: 90%;
+    margin: 0 auto; 
+    padding: 20px;
+  }
+  
+  .messages-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
+  
+  .toggle-button-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .message-card {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-card .card-footer {
+    background: transparent;
+    border-top: none;
+    display: flex;
+    justify-content: flex-end; /* Aligns the content to the right */
+    align-items: center; /* Vertically centers the content */
+  }
+  
+  .message-card .card-footer .text-muted {
+    margin: 0; /* Removes any default margin */
+  }

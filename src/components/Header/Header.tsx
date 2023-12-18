@@ -42,7 +42,7 @@ export default function Header() {
             <Nav.Link className="text text-center" href="/community">
               Community
             </Nav.Link>
-            <Nav.Link className="text text-center" href="/courses">
+            <Nav.Link className="text text-center" href="/messages">
               Messages
             </Nav.Link>
             <Nav.Link className="text text-center" href="/support">
