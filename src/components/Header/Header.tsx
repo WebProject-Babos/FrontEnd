@@ -1,18 +1,38 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth'; // Adjust the import path as necessary
+import axios from 'axios';
 
 export default function Header() {
   const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
+  const [nickName, setNickName] = useState('');
+  const [id, setId] = useState('');
+  const authToken = localStorage.getItem("Authorization");
+  
 
   const handleLogout = () => {
-    // Call the logout function from useAuth
     logout();
-    // Optionally, redirect to the home page or login page after logout
     navigate('/');
+    alert("Logged Out!");
   };
+
+  const getUserInfo = async () => {
+    try{
+      const userInfo = await axios.get(`${process.env.REACT_APP_API_URL}/members/me`, 
+      { headers: { Authorization: `${authToken}` } });
+      setNickName(userInfo.data.nickname);
+      setId(userInfo.data.id);
+    }
+    catch(error){
+      console.error("Error fetching user info:", error);
+    }
+  }
+
+  useEffect(() => {
+    getUserInfo();
+  },[]);
 
   return (
     <Navbar
@@ -46,9 +66,11 @@ export default function Header() {
               Messages
             </Nav.Link>
           </Nav>
+          
           <div className="text text-center" style={{ marginRight: '5%', backgroundColor: '#50CB93' }}>
             {isLoggedIn ? (
               <>
+                {`Welcome, ${nickName}! Your Website ID is ${id}.  `}
                 <Button
                   className="text text-center"
                   variant="danger"

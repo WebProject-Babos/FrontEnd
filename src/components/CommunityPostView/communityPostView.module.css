@@ -11,14 +11,15 @@
   border-width: 0;
   border-radius: 0;
   border-bottom: 1px solid #a9aab0;
+  padding: 0; /* Add padding if necessary, but keep it consistent with the commentForm */
 }
 
 .likeComment {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .commentForm {
@@ -26,13 +27,18 @@
   flex-direction: row;
   align-items: center;
   width: 90%;
-  margin: 20px auto; /* Center the form with margin on top and bottom */
+  margin: 20px auto; /* Adjust this margin if necessary to align with the postCard */
+  padding: 0; /* Make sure this padding is consistent with the postCard */
 }
 
-.commentForm textarea {
-  flex-grow: 1; /* Take up remaining space */
-  margin-right: 10px; /* Space between textarea and button */
+
+.commentTextarea {
+  width: calc(100% - 120px); /* Adjust width as needed */
+  margin-right: 10px;
+  /* Add other styles as needed */
 }
+
+
 
 .commentForm button {
   white-space: nowrap;

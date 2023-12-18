@@ -1,5 +1,5 @@
 @media (max-width: 576px) {
-    .container, input {
+    .container{
       width: 100% !important;
     }
   }

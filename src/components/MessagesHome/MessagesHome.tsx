@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Button, Card } from "react-bootstrap";
 import "./MessagesHome.css";
 import PageView from "../PageView/PageView";
+import { AuthContext } from "../../contexts/AuthContext";
 
 interface Message {
   id: number;
@@ -17,8 +18,12 @@ const MessagesHome = () => {
   const [receivedMessages, setReceivedMessages] = useState<Message[]>([]);
   const [showSent, setShowSent] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const authContext = useContext(AuthContext);
 
   const fetchMessages = async () => {
+    if (authContext) {
+      await authContext.refreshToken();
+    }
     try {
       // Fetch sent messages
       const sentResponse = await axios.get(
@@ -109,7 +114,15 @@ const MessagesHome = () => {
                 <Card.Text>{message.content}</Card.Text>
                 <Card.Footer>
                   <small className="text-muted">
-                    {new Date(message.date).toLocaleString()}
+                    {new Intl.DateTimeFormat("zh-CN", {
+                      timeZone: "Asia/Shanghai",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    }).format(new Date(message.date))}
                   </small>
                 </Card.Footer>
               </Card.Body>
