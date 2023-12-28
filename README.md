@@ -9,6 +9,9 @@ Please visit [https://master.d1qz4brw0bcll4.amplifyapp.com/](https://master.d1qz
 ## Running Locally:
 You will need NodeJS v18 and yarn to run the project locally.
 
+### `yarn install`
+Run this command before you start. This will download and install the dependencies required for this project.
+
 ### `yarn start`
 
 Runs the app in the development mode.\
