@@ -26,15 +26,17 @@ export default function CommunityHome() {
         setIsLoading(true);
         const response = await axios.get(`${apiUrl}/posts/all`);
         console.log(response.data);
-
+    
         const fetchedPosts = response.data.posts as Post[];
-        setPosts(fetchedPosts);
+        const sortedPosts = fetchedPosts.sort((a, b) => b.id - a.id); // Sort posts in descending order of their id
+        setPosts(sortedPosts);
         setIsLoading(false);
       } catch (error) {
         console.error(error);
         setIsLoading(false);
       }
     };
+    
 
     fetchDataFromApi();
   }, []);
