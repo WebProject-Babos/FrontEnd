@@ -7,6 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Please visit [https://master.d1qz4brw0bcll4.amplifyapp.com/](https://master.d1qz4brw0bcll4.amplifyapp.com/) to visit this website.
 
 ## Running Locally:
+You will need NodeJS v18 and yarn to run the project locally.
 
 ### `yarn start`
 
